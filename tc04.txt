@@ -1,0 +1,48 @@
+/// <summary>
+    /// Test Case Title : Verify that the user is able to delete the added fee head in the Fees module under Fee Head submodule 
+    /// Automation ID : TC03
+    /// @Author  : indhu M
+    /// </summary>
+	
+	public void TC03_Fee() throws InterruptedException
+	{
+		Login login=new Login(driver);
+		CommonData CommonData =new CommonData();
+		LoginPage_Obj LoginPageObj=new LoginPage_Obj();
+		Fee_Obj FeeObj=new Fee_Obj();Gropu
+		Fee_TestData FeeTestData = new Fee_TestData();
+		PayRoll_Obj PayRollObj=new PayRoll_Obj();
+	
+		//1.Navigate to edisapp page
+		//The user should be navigated to the Edisapp home page
+		login.loginToApplication(CommonData.UserName , CommonData.PassWord);
+		
+		//2.Click the Fee module
+		//The user should be able to navigate to the Fee module
+        base.buttonClick(LoginPageObj.Button("Fee  "));
+ //should be able to view all the sub menus FeeHead, Fee group, Installments, Categories, Fine, Schedule, Deductions, Banks&Cards, Reports.
+        Thread.sleep(3000);
+       for(int i=0;i<FeeTestData.Feemodules.length;i++) 
+     {
+     	asrt.assertTrue(base.isExists(FeeObj.FeeSubMenuItem(FeeTestData.Feemodules[i])),"Feemodule"+FeeTestData.Feemodules[i]+" is  visible to the user");
+      	
+  }
+        	
+        
+        //3.Click the Fee Heads menu
+       //The user should be able to view the Fee head window with different fee heads and a +CreateFeeHead button
+       base.buttonClick(FeeObj.FeeSubMenuItem("Fee Groups"));
+ for(int i=0;i<FeeTestData.Feesubmodules.length;i++)
+            {
+            	asrt.assertTrue(base.isExists(FeeObj.FeeHeads(FeeTestData.Feesubmodules[i])),"Feemodule"+FeeTestData.Feesubmodules[i]+" is  visible to the user");
+            }
+           
+          base.jsclick("k-icon k-i-plus");
+
+
+base.setData(LoginpageObj.Username1("Group Name"),FeeTestData.TC04_Transportfee);
+base.JsClick("k-button k-button-icontext k-primary k-grid-update");
+ base.buttonClick(FeeObj.Checkbox("FeeHead test"));
+base.JsClick("k-primary k-button");
+}
+}
